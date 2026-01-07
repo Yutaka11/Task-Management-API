@@ -1,3 +1,5 @@
+📌 Task Management API
+
 The Task Management API is a modern and simple application for managing tasks, developed with a focus on clean code, best practices, and sustainable architecture.
 Even though it uses only a single main entity (Task), the project is structured to reflect real-world systems, making it ideal for learning and portfolio purposes.
 
@@ -61,3 +63,4 @@ Example usage:
 - Organized architecture
 - Ready for testing
 - Maintainable and scalable
+
