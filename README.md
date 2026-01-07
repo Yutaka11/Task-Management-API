@@ -1,18 +1,15 @@
-📌 Task Management API
+The Task Management API is a modern and simple application for managing tasks, developed with a focus on clean code, best practices, and sustainable architecture.
+Even though it uses only a single main entity (Task), the project is structured to reflect real-world systems, making it ideal for learning and portfolio purposes.
 
-A Task Management API é uma aplicação moderna e simples para gerenciamento de tarefas, desenvolvida com foco em boas práticas, código limpo e arquitetura sustentável.
-Mesmo utilizando apenas uma entidade principal (Task), o projeto foi pensado para refletir padrões encontrados em sistemas reais, sendo ideal para estudo e portfólio.
+🚀 Features
+📋 Task Management
+- Create tasks
+- Update tasks
+- List all tasks
+- Get task by ID
+- Delete tasks
 
-🚀 Funcionalidades
-
-📋 Gerenciamento de Tarefas
-- Criar tarefa
-- Atualizar tarefa
-- Listar todas as tarefas
-- Consultar tarefa por ID
-- Excluir tarefa
-
-⭐ Atributos da Task
+⭐ Task Attributes
 - title
 - description
 - status → TODO | DOING | DONE
@@ -20,47 +17,47 @@ Mesmo utilizando apenas uma entidade principal (Task), o projeto foi pensado par
 - dueDate
 - createdAt
 
-🔎 Filtro por Prazo
-- A API oferece filtros inteligentes para consulta de tarefas baseadas no prazo:
-- Overdue → tarefas com prazo vencido
-- Today → tarefas que vencem hoje
-- Upcoming → tarefas com prazo futuro
-
-Exemplo de uso:
+🔎 Deadline Filter
+- The API provides smart filters to query tasks based on their deadline (dueDate):
+- Overdue → tasks with expired deadlines
+- Today → tasks due today
+- Upcoming → tasks due in the future
+- 
+Example usage:
 - GET /tasks?dueStatus=overdue
 - GET /tasks?dueStatus=today
 - GET /tasks?dueStatus=upcoming
 
-🧠 Regras de Negócio
-- Não permite criação de tarefa sem título
-- Não permite definição de dueDate no passado
-- Comparação de prazo baseada em data
+🧠 Business Rules
+- Tasks cannot be created without a title
+- dueDate cannot be set in the past
+- Date comparison is based on date (not only time)
 
-🏗️ Base Técnica
+🏗️ Tech Stack
 - Java 17
 - Spring Boot
-- Lombok para redução de boilerplate
-- PostgreSQL como banco de dados principal
-- Docker para padronização e execução do ambiente
-- Swagger para documentação da API
+- Lombok (to reduce boilerplate)
+- PostgreSQL as the main database
+- Docker for environment standardization and execution
+- Swagger for API documentation
 
-🎯 Objetivo do Projeto
-- Este projeto foi criado com foco em:
-- Demonstrar boas práticas de desenvolvimento
-- Estruturar um projeto limpo mesmo em cenários simples
-- Servir como base para estudos e evolução futura
-- Compor um portfólio sólido e profissional
+🎯 Project Purpose
 
-📈 Possíveis Evoluções Futuras
-- Autenticação e perfis de usuário
-- Paginação e ordenação avançada
-- Relatórios de produtividade
-- Notificações
+- This project was created to:
+- Demonstrate good development practices
+- Show that even simple systems can be clean and well-structured
+- Serve as a learning and evolution base
+- Be part of a solid and professional portfolio
+
+📈 Possible Future Improvements
+- Authentication and user roles
+- Advanced pagination and sorting
+- Productivity reports
+- Notifications
 - Dashboard
 - Multitenancy
 
-🧪 Qualidade
-- Arquitetura organizada
-- Preparado para testes
-- Fácil manutenção e evolução
-
+🧪 Code Quality
+- Organized architecture
+- Ready for testing
+- Maintainable and scalable
