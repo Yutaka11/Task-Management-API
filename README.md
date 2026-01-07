@@ -27,9 +27,9 @@ Mesmo utilizando apenas uma entidade principal (Task), o projeto foi pensado par
 - Upcoming → tarefas com prazo futuro
 
 Exemplo de uso:
-GET /tasks?dueStatus=overdue
-GET /tasks?dueStatus=today
-GET /tasks?dueStatus=upcoming
+- GET /tasks?dueStatus=overdue
+- GET /tasks?dueStatus=today
+- GET /tasks?dueStatus=upcoming
 
 🧠 Regras de Negócio
 - Não permite criação de tarefa sem título
@@ -63,3 +63,4 @@ GET /tasks?dueStatus=upcoming
 - Arquitetura organizada
 - Preparado para testes
 - Fácil manutenção e evolução
+
