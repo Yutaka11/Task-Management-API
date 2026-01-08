@@ -1,0 +1,11 @@
+-- V1_CREATE_TABLE_TASK
+
+CREATE TABLE task(
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    status ENUM('TODO', 'DOING', 'DONE') NOT NULL,
+    dueDate TIMESTAMP NOT NULL,
+    createAt TIMESTAMP NOT NULL
+
+)
