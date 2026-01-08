@@ -1,10 +1,7 @@
 package com.example.TaskManagement.infraestructure.beans;
 
 import com.example.TaskManagement.core.gateway.TaskGateway;
-import com.example.TaskManagement.core.usecases.CreateTaskUseCase;
-import com.example.TaskManagement.core.usecases.CreateTaskUseCaseImpl;
-import com.example.TaskManagement.core.usecases.ListTaskUseCase;
-import com.example.TaskManagement.core.usecases.ListTaskUseCaseImpl;
+import com.example.TaskManagement.core.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,4 +17,9 @@ public class BeanConfiguration {
     public ListTaskUseCase listTaskUseCase(TaskGateway taskGateway) {
         return new ListTaskUseCaseImpl(taskGateway);
     };
+
+    @Bean
+    public GetTaskByIdUseCase getTaskByIdUseCase(TaskGateway taskGateway){
+        return new GetTaskByIdUseCaseImpl(taskGateway);
+    }
 }

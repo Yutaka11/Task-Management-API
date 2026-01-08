@@ -1,10 +1,7 @@
 package com.example.TaskManagement.infraestructure.presentation;
 
 import com.example.TaskManagement.core.entities.Task;
-import com.example.TaskManagement.core.usecases.CreateTaskUseCase;
-import com.example.TaskManagement.core.usecases.CreateTaskUseCaseImpl;
-import com.example.TaskManagement.core.usecases.ListTaskUseCase;
-import com.example.TaskManagement.core.usecases.ListTaskUseCaseImpl;
+import com.example.TaskManagement.core.usecases.*;
 import com.example.TaskManagement.infraestructure.dtos.TaskDto;
 import com.example.TaskManagement.infraestructure.mapper.TaskDtoMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +21,7 @@ public class TaskController {
 
     private final CreateTaskUseCase createTaskUseCase;
     private final ListTaskUseCase listTaskUseCase;
+    private final GetTaskByIdUseCase getTaskByIdUseCase;
     private final TaskDtoMapper taskDtoMapper;
 
     @GetMapping
@@ -37,6 +35,19 @@ public class TaskController {
             response.put("Data", taskList);
         }
 
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> getTaskById(@PathVariable Long id){
+        Task task = getTaskByIdUseCase.execute(id);
+        Map<String, Object> response = new HashMap<>();
+        if(task != null){
+            response.put("Message", "Task founded successfully.");
+            response.put("Data", task);
+        }else{
+            response.put("Message", "Task not founded.");
+        }
         return ResponseEntity.ok(response);
     }
 

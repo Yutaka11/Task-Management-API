@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -32,5 +33,11 @@ public class TaskRepositoryGateway implements TaskGateway {
                 .stream()
                 .map(taskEntityMapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public Task GetTaskById(Long id) {
+        TaskEntity task = taskRepository.findById(id).orElse(null);
+        return taskEntityMapper.toDomain(task);
     }
 }

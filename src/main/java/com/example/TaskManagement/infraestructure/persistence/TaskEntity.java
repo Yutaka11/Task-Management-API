@@ -20,6 +20,7 @@ public class TaskEntity {
     private Long id;
     private String title;
     private String description;
+    @Enumerated(EnumType.STRING)
     private Status status;
     private LocalDateTime dueDate;
     private LocalDateTime createAt;

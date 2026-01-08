@@ -7,4 +7,5 @@ import java.util.List;
 public interface TaskGateway {
     Task CreateTask (Task task);
     List<Task> ListTask ();
+    Task GetTaskById(Long id);
 }
