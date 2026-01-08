@@ -1,6 +1,6 @@
 package com.example.TaskManagement.infraestructure.persistence;
 
-import com.example.TaskManagement.core.enuns.Stats;
+import com.example.TaskManagement.core.enuns.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class TaskDtoEntity {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
-    private Stats stats;
+    private Status status;
     private LocalDateTime dueDate;
     private LocalDateTime createAt;
 }

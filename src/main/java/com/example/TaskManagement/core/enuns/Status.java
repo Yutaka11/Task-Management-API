@@ -1,5 +1,5 @@
 package com.example.TaskManagement.core.enuns;
 
-public enum Stats {
+public enum Status {
     TODO, DOING, DONE
 }

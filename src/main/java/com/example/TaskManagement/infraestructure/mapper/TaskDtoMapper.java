@@ -2,16 +2,16 @@ package com.example.TaskManagement.infraestructure.mapper;
 
 import com.example.TaskManagement.core.entities.Task;
 import com.example.TaskManagement.infraestructure.dtos.TaskDto;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class TaskDtoMapper {
     public Task toDomain (TaskDto taskDto){
         return new Task(
                 taskDto.id(),
                 taskDto.title(),
                 taskDto.description(),
-                taskDto.stats(),
+                taskDto.status(),
                 taskDto.dueDate(),
                 taskDto.createdAt()
         );
@@ -22,7 +22,7 @@ public class TaskDtoMapper {
                 task.id(),
                 task.title(),
                 task.description(),
-                task.stats(),
+                task.status(),
                 task.dueDate(),
                 task.createdAt()
         );

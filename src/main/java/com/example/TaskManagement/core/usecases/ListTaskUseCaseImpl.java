@@ -1,18 +1,21 @@
 package com.example.TaskManagement.core.usecases;
 
+
 import com.example.TaskManagement.core.entities.Task;
 import com.example.TaskManagement.core.gateway.TaskGateway;
 
-public class CreateTaskUseCaseImpl implements CreateTaskUseCase{
+import java.util.List;
+
+public class ListTaskUseCaseImpl implements ListTaskUseCase {
 
     private final TaskGateway taskGateway;
 
-    public CreateTaskUseCaseImpl(TaskGateway taskGateway) {
+    public ListTaskUseCaseImpl(TaskGateway taskGateway) {
         this.taskGateway = taskGateway;
     }
 
     @Override
-    public Task execute(Task task) {
-        return taskGateway.CreateTask(task);
+    public List<Task> execute() {
+        return taskGateway.ListTask();
     }
 }
