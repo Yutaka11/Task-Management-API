@@ -40,4 +40,31 @@ public class TaskRepositoryGateway implements TaskGateway {
         TaskEntity task = taskRepository.findById(id).orElse(null);
         return taskEntityMapper.toDomain(task);
     }
+
+    @Override
+    public Task UpdateTask(Long id, Task task) {
+        TaskEntity taskEntity = taskRepository.findById(id).orElse(null);
+        Task current = taskEntityMapper.toDomain(taskEntity);
+        Task updated = current.update(task.title(), task.description(), task.status(), task.dueDate());
+
+        TaskEntity updatedEntity = taskEntityMapper.toEntity(updated);
+        updatedEntity.setId(current.id());
+        updatedEntity.setCreateAt(current.createdAt());
+        TaskEntity save = taskRepository.save(updatedEntity);
+
+        return taskEntityMapper.toDomain(save);
+    }
+
+    @Override
+    public Boolean DeleteTask(Long id) {
+        Boolean bool;
+        Optional<TaskEntity> task = taskRepository.findById(id);
+        if(task.isPresent()){
+            taskRepository.deleteById(id);
+            bool = true;
+        }else{
+            bool = false;
+        }
+        return bool;
+    }
 }

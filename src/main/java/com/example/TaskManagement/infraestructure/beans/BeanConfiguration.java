@@ -16,10 +16,20 @@ public class BeanConfiguration {
     @Bean
     public ListTaskUseCase listTaskUseCase(TaskGateway taskGateway) {
         return new ListTaskUseCaseImpl(taskGateway);
-    };
+    }
 
     @Bean
     public GetTaskByIdUseCase getTaskByIdUseCase(TaskGateway taskGateway){
         return new GetTaskByIdUseCaseImpl(taskGateway);
+    }
+
+    @Bean
+    public UpdateTaskUseCase uptadeTaskUseCase(TaskGateway taskGateway){
+        return new UptadeTaskUseCaseImpl(taskGateway);
+    }
+
+    @Bean
+    public DeleteTaskUseCase deleteTaskUseCase(TaskGateway taskGateway){
+        return new DeleteTaskUseCaseImpl(taskGateway);
     }
 }
