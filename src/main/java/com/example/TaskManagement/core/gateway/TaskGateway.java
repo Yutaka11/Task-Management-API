@@ -11,5 +11,4 @@ public interface TaskGateway {
     Task GetTaskById(Long id);
     Task UpdateTask(Long id, Task task);
     Boolean DeleteTask(Long id);
-    boolean verifyDate(LocalDateTime dateTime);
 }

@@ -1,6 +1,9 @@
 package com.example.TaskManagement.infraestructure.gateway;
 
 import com.example.TaskManagement.core.entities.Task;
+import com.example.TaskManagement.core.exceptions.BusinessExpection;
+import com.example.TaskManagement.core.exceptions.InvalidTaskExpection;
+import com.example.TaskManagement.core.exceptions.TaskNotFoundException;
 import com.example.TaskManagement.core.gateway.TaskGateway;
 import com.example.TaskManagement.infraestructure.mapper.TaskEntityMapper;
 import com.example.TaskManagement.infraestructure.persistence.TaskEntity;
@@ -22,6 +25,21 @@ public class TaskRepositoryGateway implements TaskGateway {
     @Override
     public Task CreateTask(Task task) {
         TaskEntity taskEntity = taskEntityMapper.toEntity(task);
+
+        if (taskEntity.getTitle() == null || taskEntity.getTitle().isBlank()) {
+            throw new BusinessExpection("Title must not be empty.");
+        }
+
+        if (taskEntity.getDueDate() == null) {
+            throw new BusinessExpection("Due date is required.");
+        }
+
+        if (taskEntity.getDueDate().isBefore(LocalDateTime.now())) {
+            throw new BusinessExpection("Due date cannot be in the past.");
+        }
+        if ((taskEntity.getStatus() == null)) {
+            throw new BusinessExpection("Status must not be empty.");
+        }
         taskEntity.setCreateAt(LocalDateTime.now());
         TaskEntity newTask = taskRepository.save(taskEntity);
         return taskEntityMapper.toDomain(newTask);
@@ -37,19 +55,22 @@ public class TaskRepositoryGateway implements TaskGateway {
 
     @Override
     public Task GetTaskById(Long id) {
-        TaskEntity task = taskRepository.findById(id).orElse(null);
+        TaskEntity task = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         return taskEntityMapper.toDomain(task);
     }
 
     @Override
     public Task UpdateTask(Long id, Task task) {
-        TaskEntity taskEntity = taskRepository.findById(id).orElse(null);
+        TaskEntity taskEntity = taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         Task current = taskEntityMapper.toDomain(taskEntity);
         Task updated = current.update(task.title(), task.description(), task.status(), task.dueDate());
 
         TaskEntity updatedEntity = taskEntityMapper.toEntity(updated);
         updatedEntity.setId(current.id());
         updatedEntity.setCreateAt(current.createdAt());
+        if(updatedEntity.getDueDate() != null && updatedEntity.getDueDate().isBefore(LocalDateTime.now())){
+            throw new InvalidTaskExpection("Due date cannot be in the past.");
+        }
         TaskEntity save = taskRepository.save(updatedEntity);
 
         return taskEntityMapper.toDomain(save);
