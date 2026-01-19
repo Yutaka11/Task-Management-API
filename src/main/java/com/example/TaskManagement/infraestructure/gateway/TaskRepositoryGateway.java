@@ -1,6 +1,7 @@
 package com.example.TaskManagement.infraestructure.gateway;
 
 import com.example.TaskManagement.core.entities.Task;
+import com.example.TaskManagement.core.enuns.Status;
 import com.example.TaskManagement.core.exceptions.BusinessExpection;
 import com.example.TaskManagement.core.exceptions.InvalidTaskExpection;
 import com.example.TaskManagement.core.exceptions.TaskNotFoundException;
@@ -24,25 +25,26 @@ public class TaskRepositoryGateway implements TaskGateway {
 
     @Override
     public Task CreateTask(Task task) {
-        TaskEntity taskEntity = taskEntityMapper.toEntity(task);
 
-        if (taskEntity.getTitle() == null || taskEntity.getTitle().isBlank()) {
+        if (task.title() == null || task.title().isBlank()) {
             throw new BusinessExpection("Title must not be empty.");
         }
 
-        if (taskEntity.getDueDate() == null) {
+        if (task.dueDate() == null) {
             throw new BusinessExpection("Due date is required.");
         }
 
-        if (taskEntity.getDueDate().isBefore(LocalDateTime.now())) {
+        if (task.dueDate().isBefore(LocalDateTime.now())) {
             throw new BusinessExpection("Due date cannot be in the past.");
         }
-        if ((taskEntity.getStatus() == null)) {
+        if ((task.status() == null)) {
             throw new BusinessExpection("Status must not be empty.");
         }
-        taskEntity.setCreateAt(LocalDateTime.now());
+        TaskEntity taskEntity = taskEntityMapper.toEntity(task);
+
         TaskEntity newTask = taskRepository.save(taskEntity);
-        return taskEntityMapper.toDomain(newTask);
+        Task createdTask = taskEntityMapper.toDomain(newTask);
+        return createdTask;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class TaskRepositoryGateway implements TaskGateway {
 
         TaskEntity updatedEntity = taskEntityMapper.toEntity(updated);
         updatedEntity.setId(current.id());
-        updatedEntity.setCreateAt(current.createdAt());
+        updatedEntity.setCreateAt(current.createAt());
         if(updatedEntity.getDueDate() != null && updatedEntity.getDueDate().isBefore(LocalDateTime.now())){
             throw new InvalidTaskExpection("Due date cannot be in the past.");
         }
@@ -87,5 +89,11 @@ public class TaskRepositoryGateway implements TaskGateway {
             bool = false;
         }
         return bool;
+    }
+
+    @Override
+    public List<Task> ListTaskByStatus(Status status) {
+        List<Task> taskList = taskRepository.findByStatus(status);
+        return taskList;
     }
 }

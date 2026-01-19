@@ -9,5 +9,5 @@ public record TaskDto(Long id,
                       String description,
                       Status status,
                       LocalDateTime dueDate,
-                      LocalDateTime createdAt) {
+                      LocalDateTime createAt) {
 }

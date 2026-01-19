@@ -29,5 +29,11 @@ public class TaskEntity {
     @NotNull
     private LocalDateTime dueDate;
     @NotNull
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createAt = LocalDateTime.now();
+    }
 }

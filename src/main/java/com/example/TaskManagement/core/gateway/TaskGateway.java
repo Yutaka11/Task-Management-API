@@ -1,6 +1,7 @@
 package com.example.TaskManagement.core.gateway;
 
 import com.example.TaskManagement.core.entities.Task;
+import com.example.TaskManagement.core.enuns.Status;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,4 +12,5 @@ public interface TaskGateway {
     Task GetTaskById(Long id);
     Task UpdateTask(Long id, Task task);
     Boolean DeleteTask(Long id);
+    List<Task> ListTaskByStatus(Status status);
 }

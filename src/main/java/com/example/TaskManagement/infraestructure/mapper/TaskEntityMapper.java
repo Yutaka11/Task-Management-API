@@ -13,7 +13,7 @@ public class TaskEntityMapper {
                 task.description(),
                 task.status(),
                 task.dueDate(),
-                task.createdAt()
+                null
         );
     }
 

@@ -13,7 +13,7 @@ public class TaskDtoMapper {
                 taskDto.description(),
                 taskDto.status(),
                 taskDto.dueDate(),
-                taskDto.createdAt()
+                null
         );
     }
 
@@ -24,7 +24,7 @@ public class TaskDtoMapper {
                 task.description(),
                 task.status(),
                 task.dueDate(),
-                task.createdAt()
+                task.createAt()
         );
     }
 }

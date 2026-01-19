@@ -10,7 +10,7 @@ public record Task(
          String description,
          Status status,
          LocalDateTime dueDate,
-         LocalDateTime createdAt) {
+         LocalDateTime createAt) {
     public Task update(
             String title,
             String description,
@@ -23,7 +23,7 @@ public record Task(
                 description != null ? description : this.description,
                 status != null ? status : this.status,
                 dueDate != null ? dueDate : this.dueDate,
-                createdAt
+                createAt
         );
     }
 }

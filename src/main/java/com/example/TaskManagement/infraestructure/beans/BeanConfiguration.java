@@ -1,5 +1,6 @@
 package com.example.TaskManagement.infraestructure.beans;
 
+import com.example.TaskManagement.TaskManagementApplication;
 import com.example.TaskManagement.core.gateway.TaskGateway;
 import com.example.TaskManagement.core.usecases.*;
 import org.springframework.context.annotation.Bean;
@@ -31,5 +32,10 @@ public class BeanConfiguration {
     @Bean
     public DeleteTaskUseCase deleteTaskUseCase(TaskGateway taskGateway){
         return new DeleteTaskUseCaseImpl(taskGateway);
+    }
+
+    @Bean
+    public ListTaskByStatusUseCase listTaskByStatusUseCase(TaskGateway taskGateway){
+        return new ListTaskByStatusUseCaseImpl(taskGateway);
     }
 }

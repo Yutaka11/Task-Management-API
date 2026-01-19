@@ -17,7 +17,7 @@ Even though it uses only a single main entity (Task), the project is structured 
 - status → TODO | DOING | DONE
 - priority → LOW | MEDIUM | HIGH
 - dueDate
-- createdAt
+- createAt
 
 🔎 Deadline Filter
 - The API provides smart filters to query tasks based on their deadline (dueDate):

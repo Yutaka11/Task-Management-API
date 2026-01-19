@@ -1,6 +1,8 @@
 package com.example.TaskManagement.infraestructure.presentation;
 
 import com.example.TaskManagement.core.entities.Task;
+import com.example.TaskManagement.core.enuns.Status;
+import com.example.TaskManagement.core.exceptions.BusinessExpection;
 import com.example.TaskManagement.core.usecases.*;
 import com.example.TaskManagement.infraestructure.dtos.TaskDto;
 import com.example.TaskManagement.infraestructure.mapper.TaskDtoMapper;
@@ -22,6 +24,7 @@ public class TaskController {
     private final CreateTaskUseCase createTaskUseCase;
     private final ListTaskUseCase listTaskUseCase;
     private final GetTaskByIdUseCase getTaskByIdUseCase;
+    private final ListTaskByStatusUseCase listTaskByStatusUseCase;
     private final UpdateTaskUseCase updateTaskUseCase;
     private final DeleteTaskUseCase deleteTaskUseCase;
     private final TaskDtoMapper taskDtoMapper;
@@ -53,12 +56,26 @@ public class TaskController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/status")
+    public ResponseEntity<Map<String, Object>> listTaskByStatus(@RequestParam Status status){
+
+        System.out.println("STATUS RECEIVED: " + status);
+
+        List<Task> taskList = listTaskByStatusUseCase.execute(status);
+
+        System.out.println("TASKS FOUND: " + taskList.size());
+        Map<String, Object> response = new HashMap<>();
+        response.put("Message", "Tasks founded successfully.");
+        response.put("Data", taskList);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<Map<String, Object>> create(@RequestBody TaskDto dto){
         Task task = createTaskUseCase.execute(taskDtoMapper.toDomain(dto));
         Map<String, Object> response = new HashMap<>();
         response.put("Message", "Task created successfully.");
-        response.put("Data", dto);
+        response.put("Data", task);
         return ResponseEntity.ok(response);
     }
 
